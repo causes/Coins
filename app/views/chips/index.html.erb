@@ -1,0 +1,47 @@
+<div id="todays_chips">
+<h1>Today's Chips</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <% @categories.each do |cat| %>
+      <th><%=cat%></th>
+    <% end %>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%=h user.name %></td>
+    <% @categories.each do |cat| %>
+      <td>
+        <span id="user_<%=user.id%>_category_<%=cat.id%>_coins">
+
+          <img class="create_chip" src="images/add.png" height="24" width="24" href="#<%=auto_create_chips_path(:user => user, :category => cat)%>"/>
+          <% user.category_count(cat).times do %>
+          <img class="coin_img" src="images/coin.png" width="24" height="24"/>
+          <% end %>
+        </span>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<div id="weeks_chips">
+<h1>This Week's Chips</h1>
+
+<table>
+<% @this_weeks_chips.each do |cat, chips| %>
+<tr>
+  <th><%=cat%></th>
+  <td>
+    <% chips.each do %>
+    <img src="images/coin.png" width="24" height="24"/>
+    <% end %>
+  </td>
+  <td><%=chips.size%></td>
+</tr>
+<% end %>
+</table>
+</div>

@@ -1,0 +1,13 @@
+<p>
+  <b>User:</b>
+  <%=h @chip.user %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%=h @chip.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_chip_path(@chip) %> |
+<%= link_to 'Back', chips_path %>

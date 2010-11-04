@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :categories
   map.resources :users
+  map.resources :chips, :collection => { :auto_create => :get }
+  map.root :controller => :chips
 
   # The priority is based upon order of creation: first created -> highest priority.
 
