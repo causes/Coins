@@ -5,12 +5,12 @@ class ChipsController < ApplicationController
     @users = User.all
     @categories = Category.all
     @todays_chips = Chip.today
-    @this_weeks_chips = Chip.last_month.group_by(&:category)
+    @months_chips = Chip.last_month.group_by(&:category)
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @chips }
-    end
+    end 
   end
 
   # GET /chips/1

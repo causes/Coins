@@ -14,10 +14,8 @@
     <td><%=h user.name %></td>
     <% @categories.each do |cat| %>
       <td>
+        <img class="create_chip" src="images/add.png" width="24" height="24"/>
         <span id="user_<%=user.id%>_category_<%=cat.id%>_coins">
-
-          <img class="create_chip" src="images/add.png" width="16" height="16"/>
-
           <% if @todays_chips[user] != nil && @todays_chips[user][cat] != nil %>
             <% @todays_chips[user][cat].each do |chip| %>
             <img id="chip_<%=chip.id%>" class="coin_img" src="images/coin.png" width="24" height="24"/>
@@ -29,12 +27,34 @@
   </tr>
 <% end %>
 </table>
+
+
+<div id="add_form">
+  <form action="/users/auto_create" method="POST">
+  <fieldset>
+    <label for="name">Add User:</label>
+    <input type="text" name="name"/>
+    <input type="submit" value="Add"/>
+  </fieldset>
+  </form>
+
+
+  <form action="/categories/auto_create" method="POST">
+  <fieldset>
+    <label for="name">Add Category:</label>
+    <input type="text" name="name"/>
+    <input type="submit" value="Add"/>
+  </fieldset>
+  </form>
 </div>
+
+</div>
+
 <div id="weeks_chips">
-<h1>This Week's Chips</h1>
+<h1>This Month's Chips</h1>
 
 <table>
-<% @this_weeks_chips.each do |cat, chips| %>
+<% @months_chips.each do |cat, chips| %>
 <tr>
   <th><%=cat%></th>
   <td>

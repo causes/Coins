@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  protect_from_forgery :except => [:auto_create]
+
   # GET /categories
   # GET /categories.xml
   def index
@@ -80,6 +83,15 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(categories_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def auto_create
+    cat = Category.new(:name => params[:name])
+    cat.save
+
+    respond_to do |format|
+      format.html { redirect_to(chips_url) }
     end
   end
 end

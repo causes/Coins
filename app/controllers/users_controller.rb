@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  protect_from_forgery :except => [:auto_create]
+
   # GET /users
   # GET /users.xml
   def index
@@ -80,6 +83,15 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def auto_create
+    user = User.new(:name => params[:name])
+    user.save
+
+    respond_to do |format|
+      format.html { redirect_to(chips_url) }
     end
   end
 end
