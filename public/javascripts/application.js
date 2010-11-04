@@ -1,33 +1,19 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-
 $ = jQuery;
 
 $(document).ready(function () {
-
   // listen for coin clicks
   $('#todays_chips').click(function(event) {
-
-    alert('clicked inside, this is ' + $(this).parent().attr('id'));
-
     // check that click was on a coin
     if( $(event.target).hasClass('coin_img') ) {
       // remove coin
-      var coin = $(event.target);
-      var pid = coin.parent().attr('id');
-      var arr = pid.split('_');
-      var user_id = arr[1];
-      var category_id = arr[3];
+      var chip_id = $(event.target).attr('id').split('_')[1];
+      var url = '/chips/auto_destroy?chip=' + chip_id;
 
-      var url = '/chips/auto_destroy?user=' + user_id + '&category=' + category_id;
-      alert(url);
-
-      $.post({
+      $.ajax({
+        type: 'POST',
         url: url,
         success: function(resp) {
-          alert(resp);
-          // destroy actual coin
-          $(this).remove();
+          $('#chip_' + chip_id).remove();
         }
       });
     }
@@ -44,21 +30,16 @@ $(document).ready(function () {
     $.ajax({
       type: 'POST',
       url: url,
-      success: function(resp) {
-        create_coin(user_id, category_id);
+      success: function(coin_id) {
+        create_coin(coin_id, user_id, category_id);
       }
     });
   });
 });
 
-function create_coin(user_id, category_id) {
+function create_coin(chip_id, user_id, category_id) {
   var container = $('#user_' + user_id + '_category_' + category_id + '_coins');
-  var new_coin = $('<img src="images/coin.png" width="24" height="24"/>');
-
-  new_coin.click(function () {
-     alert('coin click');
-  });
-
+  var new_coin = $('<img id="chip_' + chip_id + '" class="coin_img" src="images/coin.png" width="24" height="24"/>');
   container.append(new_coin);
 }
 

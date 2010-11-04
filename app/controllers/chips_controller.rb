@@ -2,14 +2,10 @@ class ChipsController < ApplicationController
   # GET /chips
   # GET /chips.xml
   def index
-    @categories = Category.all
     @users = User.all
-
-    @this_weeks_chips = Chip.last_month.group_by { |c| c.category }
-    #.inject({}) do |h, (day, chips)|
-    #  h[day] = chips.group_by(&:category)
-    #  h
-    #end
+    @categories = Category.all
+    @todays_chips = Chip.today
+    @this_weeks_chips = Chip.last_month.group_by(&:category)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -98,17 +94,22 @@ class ChipsController < ApplicationController
       c.category, Date.today)
 
     respond_to do |format|
-      format.js { render :js => "#{count}" }
+      format.js { render :js => "#{c.id}" }
     end
   end
 
   def auto_destroy
-    c = Chip.find(:user_id => params[:user], :category_id => params[:category])
-    c = c.first if c.size > 1
-    c.destroy
+    result = "fail"
+
+    c = Chip.find(params[:chip]) 
+    
+    if c != nil
+      c.destroy
+      result = "success"
+    end
 
     respond_to do |format|
-      format.js { render :js => "success" }
+      format.js { render :js => result }
     end
   end
 end
