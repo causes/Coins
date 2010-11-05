@@ -1,4 +1,7 @@
 class ChipsController < ApplicationController
+
+  before_filter :require_user, :only => [:index, :show, :new, :edit, :create, :destroy, :update, :auto_create, :auto_destroy]
+
   # GET /chips
   # GET /chips.xml
   def index
@@ -13,7 +16,7 @@ class ChipsController < ApplicationController
     end 
   end
 
-  # GET /chips/1
+  # GET /chips/
   # GET /chips/1.xml
   def show
     @chip = Chip.find(params[:id])
@@ -24,7 +27,7 @@ class ChipsController < ApplicationController
     end
   end
 
-  # GET /chips/new
+  # GET /chipsnew
   # GET /chips/new.xml
   def new
     @chip = Chip.new

@@ -2,7 +2,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :categories
   map.resources :users
   map.resources :chips, :collection => { :auto_create => :get }
-  map.root :controller => :chips
+  
+  # authentication
+  map.resource :account, :controller => "users"
+  map.resource :user_session
+  map.root :controller => "user_sessions", :action => "new"
 
   # The priority is based upon order of creation: first created -> highest priority.
 

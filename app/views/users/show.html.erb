@@ -1,8 +1,8 @@
 <p>
-  <b>Name:</b>
-  <%=h @user.name %>
+  <b>Login:</b>
+  <%=h @user.login %>
 </p>
 
-
+<%= link_to 'Chips', chips_path %> | 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

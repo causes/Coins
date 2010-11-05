@@ -11,7 +11,7 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%=h user.name %></td>
+    <td><%=h user.login %></td>
     <% @categories.each do |cat| %>
       <td>
         <img class="create_chip" src="images/add.png" width="24" height="24"/>
@@ -28,25 +28,10 @@
 <% end %>
 </table>
 
-
-<div id="add_form">
-  <form action="/users/auto_create" method="POST">
-  <fieldset>
-    <label for="name">Add User:</label>
-    <input type="text" name="name"/>
-    <input type="submit" value="Add"/>
-  </fieldset>
-  </form>
-
-
-  <form action="/categories/auto_create" method="POST">
-  <fieldset>
-    <label for="name">Add Category:</label>
-    <input type="text" name="name"/>
-    <input type="submit" value="Add"/>
-  </fieldset>
-  </form>
-</div>
+  <p>
+    <%= link_to 'Add User', new_user_path %> |
+    <%= link_to 'Add Category', new_category_path %>
+  </p>
 
 </div>
 
