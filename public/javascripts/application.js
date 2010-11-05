@@ -10,8 +10,6 @@ $(document).ready(function () {
       var chip_id = $(event.target).attr('id').split('_')[1];
       var url = '/chips/auto_destroy?chip=' + chip_id;
 
-      alert(url);
-
       $.ajax({
         type: 'POST',
         url: url,
