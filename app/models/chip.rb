@@ -7,7 +7,7 @@ class Chip < ActiveRecord::Base
 
   def self.today
     chips = Chip.all(:conditions => {
-      :created_at => Date.today .. Date.tomorrow
+      :created_at => Date.today.midnight.utc..Date.tomorrow.midnight.utc
     }).group_by(&:user)
     
     # now group sets of user chips by category
