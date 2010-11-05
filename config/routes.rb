@@ -8,6 +8,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.root :controller => "user_sessions", :action => "new"
 
+  # admin
+  map.resource :admin
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
