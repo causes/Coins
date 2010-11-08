@@ -1,0 +1,29 @@
+<h2>Users</h2>
+
+<ul>
+<% @users.each do |u| %>
+  <li>
+    <span class="login"><%= h u.login %></span>
+    <span class="roles">
+      <% 
+        # not the cleanest implementation, rewrite if more roles get added 
+      -%>
+      <% if u.is_approved? %>
+        <%= link_to 'unapprove', remove_admin_roles_path(  
+          'role' => 'approved', 'user_id' => u.id) %>
+      <% else %>
+        <%= link_to 'approve', add_admin_roles_path(
+          'role' => 'approved', 'user_id' => u.id) %>
+      <% end %>
+
+      <% if u.is_admin? %>
+        <%= link_to 'remove admin', remove_admin_roles_path(
+          'role' => 'admin', 'user_id' => u.id) %>
+      <% else %>
+        <%= link_to 'make admin', add_admin_roles_path(
+          'role' => 'admin', 'user_id' => u.id) %>
+      <% end %>
+    </span>
+  </li>
+<% end %>
+</ul>

@@ -8,8 +8,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.root :controller => "user_sessions", :action => "new"
 
-  # admin
-  map.resource :admin
+  # admin namespace
+  map.namespace :admin do |admin|
+    admin.resources :users
+    admin.resources :roles, :collection => {
+      :add => :get,
+      :remove => :get
+    }
+    admin.root :controller => :users
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

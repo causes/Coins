@@ -47,8 +47,8 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        flash[:notice] = 'Category was successfully created.'
-        format.html { redirect_to(@category) }
+        flash[:notice] = 'Category created.'
+        format.html { redirect_to chips_path }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
         format.html { render :action => "new" }
@@ -64,8 +64,8 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        flash[:notice] = 'Category was successfully updated.'
-        format.html { redirect_to(@category) }
+        flash[:notice] = 'Category updated.'
+        format.html { redirect_to categories_path }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,9 +79,10 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
+    flash[:notice] = 'Category deleted.'
 
     respond_to do |format|
-      format.html { redirect_to(categories_url) }
+      format.html { redirect_to categories_path }
       format.xml  { head :ok }
     end
   end

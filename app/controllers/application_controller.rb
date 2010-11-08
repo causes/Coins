@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   # make current user and session available
   helper_method :current_user_session, :current_user
 
+  layout "main"
+
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
