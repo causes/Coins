@@ -1,13 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :categories
-  map.resources :users
-  map.resources :chips, :collection => { :auto_create => :get }
-  
-  # authentication
-  map.resource :account, :controller => "users"
-  map.resource :user_session
+
   map.root :controller => "user_sessions", :action => "new"
 
+  map.resources :categories
+  map.resources :accounts
+  #map.resources :users, :controller => "account"
+  map.resources :chips, :collection => { 
+    :auto_create => :get }
+
+  map.resource :user_session
+  
   # admin namespace
   map.namespace :admin do |admin|
     admin.resources :users
