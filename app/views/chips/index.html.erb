@@ -28,10 +28,11 @@
 <% end %>
 </table>
 
+  <% if current_user.is_approved? %>
   <p>
-    <%= link_to 'Add User', new_user_path %> |
     <%= link_to 'Add Category', new_category_path %>
   </p>
+  <% end %>
 
 </div>
 
