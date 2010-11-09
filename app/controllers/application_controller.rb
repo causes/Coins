@@ -42,9 +42,18 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    # rewrite if more roles are added
     def require_admin
       unless current_user && current_user.is_admin?
         flash[:notice] = "You are not authorized to access that page"
+        redirect_to chips_path
+      end
+    end
+
+    # rewrite if more roles are added
+    def require_approved
+      unless current_user && current_user.is_approved?
+        flash[:notice] = "You must be approved to access that page"
         redirect_to chips_path
       end
     end

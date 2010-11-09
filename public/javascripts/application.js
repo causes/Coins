@@ -5,7 +5,6 @@ $(document).ready(function () {
   $('#todays_chips').click(function(event) {
     // check that click was on a coin
     if( $(event.target).hasClass('coin_img') ) {
-
       // remove coin
       var chip_id = $(event.target).attr('id').split('_')[1];
       var url = '/chips/auto_destroy?chip=' + chip_id;
@@ -14,6 +13,11 @@ $(document).ready(function () {
         type: 'POST',
         url: url,
         success: function(resp) {
+          if(resp == "fail") {
+            alert('You must be approved to remove chips.');
+            return;
+          }
+          
           $('#chip_' + chip_id).remove();
         }
       });
@@ -39,7 +43,13 @@ $(document).ready(function () {
     $.ajax({
       type: 'GET',
       url: url,
-      success: function(coin_id) {
+      success: function(resp) {
+        if (resp == "fail") {
+          alert('You must be approved to create chips');
+          return;
+        }
+        
+        coin_id = resp;
         create_coin(coin_id, user_id, category_id);
       }  
     });
