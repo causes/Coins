@@ -1,7 +1,5 @@
 class Admin::RolesController < Admin::AdminController
 
-  before_filter :require_admin
-
   def index
     @users = User.all
   end
