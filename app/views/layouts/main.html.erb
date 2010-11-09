@@ -25,10 +25,11 @@
   <% end %>
   &nbsp;&nbsp;&nbsp;&nbsp;
   Hi, <%=current_user.login%>! 
+  
   <%= link_to "My Account", account_path %> | 
   
   <% if current_user.is_admin? %>
-  TODO admin_admin_path | 
+    <%= link_to 'Admin', admin_root_path %> | 
   <% end %>
 
   <%= link_to "Logout", user_session_path, :method => :delete %>

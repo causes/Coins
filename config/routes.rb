@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
   map.resources :accounts
+  map.account "account/", :controller => "accounts", :action => "show"
   #map.resources :users, :controller => "account"
   map.resources :chips, :collection => { 
     :auto_create => :get }

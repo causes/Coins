@@ -3,7 +3,12 @@
 <ul>
 <% @users.each do |u| %>
   <li>
-    <span class="login"><%= h u.login %></span>
+    <%= h u.login %>: 
+    <%= link_to 'Edit', url_for(
+      :controller => "admin/users",
+      :action => "edit",
+      :id => u.id) %> | 
+    <%= link_to 'Destroy', admin_user_path(u.id), :method => :delete %>
     <span class="roles">
       <% 
         # not the cleanest implementation, rewrite if more roles get added 

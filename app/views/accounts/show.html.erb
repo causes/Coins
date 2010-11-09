@@ -3,4 +3,4 @@
   <%=h @user.login %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %>
+<%= link_to 'Edit', :controller => "accounts", :action => "edit", :id => @user %>

@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
     end
   end
 
-  # TODO POST /account/create
   def create
     @user = User.new(params[:user])
 
