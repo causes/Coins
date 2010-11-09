@@ -36,9 +36,16 @@ class ApplicationController < ActionController::Base
     def require_no_user
       if current_user
         store_location
-        # flash[:notice] = "You must be logged out to access this page"
+        flash[:notice] = "You must be logged out to access this page"
         redirect_to chips_url
         return false
+      end
+    end
+
+    def require_admin
+      unless current_user && current_user.is_admin?
+        flash[:notice] = "You are not authorized to access that page"
+        redirect_to chips_path
       end
     end
 

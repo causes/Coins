@@ -1,6 +1,6 @@
 class Admin::AdminController < ApplicationController
 
-  before_filter :require_user, :only => [:index, :add_role, :remove_role]
+  before_filter :require_admin
 
   def index
     @users = User.all
