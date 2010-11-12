@@ -4,6 +4,27 @@ class Admin::UsersController < Admin::AdminController
     @users = User.all
   end
 
+  def new 
+    @user = User.new
+    respond_to do |format|
+      format.html # new.html.erb
+    end
+  end
+
+  def create
+    @user = User.new(params[:user])
+
+    respond_to do |format|
+      if @user.save
+        flash[:notice] = "User created."
+        format.html { redirect_to admin_root_path }
+      else
+        flash[:notice] = "Creation failed. Try again."
+        format.html { render :action => "new" }
+      end
+    end
+  end
+
   def edit
     @user = User.find(params[:id])
     
