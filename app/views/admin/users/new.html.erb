@@ -1,0 +1,7 @@
+<h1>Create A User</h1>
+
+<% form_for @user, :url => admin_users_path do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Create" %>
+<% end %>
