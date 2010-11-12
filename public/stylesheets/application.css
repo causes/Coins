@@ -1,0 +1,28 @@
+div#container {
+  width: 100%;
+  border: 1px dashed #000000;
+  position: relative;
+  float: left;
+}
+
+div#user_select, div#category_select {
+  width: 100%;
+  border: 1px solid #000000;
+  position: relative;
+}
+
+div#user_select div.user, div#category_select div.category {
+  float: left;
+  width: 100px;
+  height: 30px;
+  border: 1px solid #000000;
+  position: absolute;
+}
+
+div.keynav_focusbox {
+  background-color: yellow;
+}
+
+.keynav_selected {
+  background-color: green;
+}

@@ -1,55 +1,44 @@
-<div id="todays_chips">
-<h1>Today's Chips</h1>
+<script type="text/javascript">
+function get_data() {
+  return new Object({
+    'chips': <%= @chips_json %>,
+    'users': <%= @users_json %>,
+    'categories': <%= @categories_json %>
+  });
+}
+</script>
 
-<table border="1">
-  <tr>
-    <th>User</th>
-    <% @categories.each do |cat| %>
-      <th><%=cat%></th>
+<div id="container">
+  <p>Who gets a chip?</p>
+  
+  <div id="user_select">  
+    <% @users.each do |user| %>
+    <div class="user" id="user_<%=user.id%>">
+      <span class="user_name"><%=user.login%></span>
+    </div>
     <% end %>
-  </tr>
+  </div>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%=h user.login %></td>
+  <p>And for which category?</p>
+
+  <div id="category_select">
     <% @categories.each do |cat| %>
-      <td>
-        <img class="create_chip" src="images/add.png" width="24" height="24"/>
-        <span id="user_<%=user.id%>_category_<%=cat.id%>_coins">
-          <% if @todays_chips[user] != nil && @todays_chips[user][cat] != nil %>
-            <% @todays_chips[user][cat].each do |chip| %>
-            <img id="chip_<%=chip.id%>" class="coin_img" src="images/coin.png" width="24" height="24"/>
-            <% end %>
-          <% end %>
-        </span>
-      </td>
+    <div class="category" id="category_<%=cat.id%>">
+      <span class="category_name"><%=cat.name%></span>
+      <span class="category_chips"></span>
+    </div>
     <% end %>
-  </tr>
-<% end %>
-</table>
-
-  <% if current_user.is_approved? %>
-  <p>
-    <%= link_to 'Add Category', new_category_path %>
-  </p>
-  <% end %>
-
+  </div>
 </div>
 
-<div id="weeks_chips">
-<h1>This Month's Chips</h1>
-
-<table>
-<% @months_chips.each do |cat, chips| %>
-<tr>
-  <th><%=cat%></th>
-  <td>
-    <% chips.each do %>
-    <img src="images/coin.png" width="24" height="24"/>
+<div id="links">
+  <p>
+    <% if current_user.is_approved? %>
+    <%= link_to 'Add Category', new_category_path %>
     <% end %>
-  </td>
-  <td><%=chips.size%></td>
-</tr>
-<% end %>
-</table>
+
+    <% if current_user.is_admin? %>
+    <%= link_to 'Add User', new_admin_user_path %>
+    <% end %>
+  </p>
 </div>

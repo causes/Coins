@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    name
+    "#{id}:#{login}"
   end
 end
