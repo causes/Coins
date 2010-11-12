@@ -1,7 +1,6 @@
 class ChipsController < ApplicationController
 
   before_filter :require_user
-  #before_filter :require_approved, :except => [:index]
 
   # GET /chips
   # GET /chips.xml
@@ -9,7 +8,11 @@ class ChipsController < ApplicationController
     @users = User.all
     @categories = Category.all
     @todays_chips = Chip.today
-    @months_chips = Chip.last_month.group_by(&:category)
+
+    ActiveRecord::Base.include_root_in_json = false
+    @chips_json = @todays_chips.to_json# (:only => [:id, :user, :category])
+    @users_json = @users.to_json(:only => [:id, :login])
+    @categories_json = @categories.to_json(:only => [:id, :name])
 
     respond_to do |format|
       format.html # index.html.erb
